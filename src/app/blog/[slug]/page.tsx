@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
+import Image from "next/image";
 
 export default async function page({params:{slug}}:{params:{slug:string}}) {
 
@@ -18,7 +19,7 @@ export default async function page({params:{slug}}:{params:{slug:string}}) {
   {data.Title}
 </h1>
       {/* Featured Image */}
-       <img
+       <Image
                   className="lg:h-48 md:h-36 object-cover object-center"
                   width={544}
                   height={606}
@@ -36,7 +37,7 @@ export default async function page({params:{slug}}:{params:{slug:string}}) {
       </section>
       {/* Author Section (Image & Bio) */}
       <section className="px-2 sm:px-8 md:px-12 flex gap-2 xs:gap-4 sm:gap-6 items-start xs:items-center justify-start">
-        <img
+        <Image
           src={urlFor(data.image).url()}
           width={100}
           height={100}

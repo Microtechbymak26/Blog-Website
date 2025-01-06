@@ -1,6 +1,7 @@
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
 
 const hero = ({data}:{data:Blog}) => {
 
@@ -16,9 +17,11 @@ const hero = ({data}:{data:Blog}) => {
     
       <div className="p-4 md:w-1/3 grid grid-cols-1 grid-rows-1 ">
         <div className="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
-          <img
+          <Image
             className="lg:h-48 md:h-36 w-full object-cover object-center"
             src={urlFor(data.image).url()}
+            width={544}
+            height={306}
             alt="blog"
           />
           <div className="p-6">
