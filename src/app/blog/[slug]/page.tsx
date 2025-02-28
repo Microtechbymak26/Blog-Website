@@ -10,48 +10,72 @@ export default async function page({params:{slug}}:{params:{slug:string}}) {
     }[0]`
 
     const data = await client.fetch(query)
-    
+return (
+  <article className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+    {/* Hero Section with Title and Featured Image */}
+    <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] w-full">
+      <Image
+        src={urlFor(data.image).url()}
+        alt="blog cover"
+        fill
+        priority
+        className="object-cover brightness-50"
+      />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-4xl mx-auto px-4 text-center leading-tight">
+          {data.Title}
+        </h1>
+      </div>
+    </div>
 
-  return (
-    <article className="pt-10 px-2 2xl:px-12 flex flex-col gap-y-8 bg-gray-900">
-      {/* Blog Title */}
-      <h1 className="text-xl xs:text-3xl lg:text-5xl font-bold text-dark dark:text-light text-white ">
-  {data.Title}
-</h1>
-      {/* Featured Image */}
-       <Image
-                  className="lg:h-48 md:h-36 object-cover object-center"
-                  width={544}
-                  height={606}
-                  src={urlFor(data.image).url()}
-                  alt="blog"
-                />
-      {/* Blog Summary Section */}
-      <section>
-      <h2 className="text-xl xs:text-2xl md:text-3xl font-bold uppercase text-accentDarkPrimary text-white">
-        Summary
-      </h2>
-      <p className="text-base md:text-xl leading-relaxed text-justify text-dark/80 dark:text-light/80 text-white">
-      {data.Paragraph}
-      </p>
-      </section>
-      {/* Author Section (Image & Bio) */}
-      <section className="px-2 sm:px-8 md:px-12 flex gap-2 xs:gap-4 sm:gap-6 items-start xs:items-center justify-start">
-        <Image
-          src={urlFor(data.image).url()}
-          width={100}
-          height={100}
-          alt=""
-          className="object-cover rounded-full h-12 w-12 sm:h-24 sm:w-24"
-        />
-        
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+      {/* Author Info Card */}
+      <div className="bg-gray-800 rounded-xl p-6 mb-12 shadow-xl">
+        <div className="flex items-center gap-4">
+          <Image
+            src={urlFor(data.image).url()}
+            width={60}
+            height={60}
+            alt="author"
+            className="rounded-full object-cover border-2 border-blue-500"
+          />
+          <div>
+            <h3 className="text-lg font-semibold text-white">Author Name</h3>
+            <p className="text-gray-400 text-sm">Posted on {new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Summary Section */}
+      <section className="bg-gray-800/50 rounded-xl p-6 mb-12 backdrop-blur-sm">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span className="h-8 w-1 bg-blue-500 rounded-full"></span>
+          Summary
+        </h2>
+        <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+          {data.Paragraph}
+        </p>
       </section>
 
-      {/* Main Body of Blog */}
-      <section className="text-lg leading-normal text-dark/80 dark:text-light/80 text-white">
-     <PortableText value={data.block}/>
+      {/* Main Content */}
+      <section className="bg-gray-800/30 rounded-xl p-6 mb-12 backdrop-blur-sm">
+        <div className="prose prose-lg prose-invert max-w-none">
+          <PortableText 
+            value={data.block}
+            components={{
+              block: {
+                normal: ({children}) => (
+                  <p className="text-gray-300 mb-4">{children}</p>
+                ),
+                h2: ({children}) => (
+                  <h2 className="text-2xl font-bold text-white mt-8 mb-4">{children}</h2>
+                ),
+              }
+            }}
+          />
+        </div>
       </section>
-
-    </article>
-  );
+    </div>
+  </article>
+  )
 }
