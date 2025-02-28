@@ -40,7 +40,7 @@ return (
             className="rounded-full object-cover border-2 border-blue-500"
           />
           <div>
-            <h3 className="text-lg font-semibold text-white">Author Name</h3>
+            <h3 className="text-lg font-semibold text-white">M Ateeb</h3>
             <p className="text-gray-400 text-sm">Posted on {new Date().toLocaleDateString()}</p>
           </div>
         </div>
