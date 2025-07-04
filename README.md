@@ -184,4 +184,4 @@ A: Add new files in the `src/app/` or `src/app/components/` directory and update
 **Q: How do I customize the design?**
 A: Edit `globals.css`, `tailwind.config.ts`, or component files to change styles and layout.
 
-
+Built with ❤️ by Mak Developer
